@@ -1,8 +1,9 @@
 project:
   type: website
+  output-dir: docs
 
 website:
-  title: "PersonalWebsite"
+  title: "Shane A. Scaggs"
   navbar:
     right:
       - about.qmd
