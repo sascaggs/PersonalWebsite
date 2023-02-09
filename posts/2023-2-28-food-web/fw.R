@@ -8,8 +8,8 @@ library(ggraph)
 library(igraph)
 
 # link functions 
-logit = function(x) exp(x) / (1+exp(x))
-inv_logit = function(x) { exp(x) / (1 + exp(x)) }
+logit = function(p) {  log( p / (1 - p))  }
+inv_logit = function(x) { 1 / (1+ exp(-x) ) }
 
 set.seed(7)
 
@@ -57,17 +57,6 @@ g$omnivory = ifelse(g$troph_pred == 'o' , 1, 0)
 g$herbivory = ifelse(g$troph_pred == 'h' & g$troph_prey == 'p'  , 1, 0)
 
 
-
-
-
-
-
-
-g$p = logit( 1 + log( exp( g$body_size_diff )^1.5 ) + 0.5*g$carnivory + 0.5*g$omnivory + 0.5*g$herbivory )
-g$consumption = rbinom( nrow(g), size=1, prob = g$p ) 
-g[ g$troph_pred == 'a' , 'consumption' ] = 0
-g[ g$troph_pred == 'c' & g$troph_prey == 'a' , "consumption"] = 0
-g
 
 # functionalized food web simulation ----
 
@@ -133,7 +122,7 @@ sim_FW = function( N ,
     if( model == 'allometric') { 
         
         D = g$body_size_diff
-        g$p = logit( base_rate + sign(D)*abs(D)^alpha  )
+        g$p = inv_logit( base_rate + sign(D)*abs(D)^alpha  )
         g$consumption = rbinom( nrow(g), size=1, prob = g$p ) 
         g[ g$troph_pred == 'auto' , 'consumption' ] = 0
         g[ g$troph_pred == 'carn' & g$troph_prey == 'auto' , "consumption"] = 0
@@ -141,7 +130,7 @@ sim_FW = function( N ,
         
     } else if( model == 'dietary' ) {
         
-        g$p = logit( base_rate + bC*g$carnivory + bO*g$omnivory + bH*g$herbivory )
+        g$p = inv_logit( base_rate + bC*g$carnivory + bO*g$omnivory + bH*g$herbivory )
         g$consumption = rbinom( nrow(g), size=1, prob = g$p ) 
         g[ g$troph_pred == 'auto' , 'consumption' ] = 0
         g[ g$troph_pred == 'carn' & g$troph_prey == 'auto' , "consumption"] = 0
@@ -150,7 +139,7 @@ sim_FW = function( N ,
     } else if( model == 'combined' ) {
         
         D = g$body_size_diff
-        g$p = logit( base_rate + sign(D)*abs(D)^alpha + bC*g$carnivory + bO*g$omnivory + bH*g$herbivory )
+        g$p = inv_logit( base_rate + sign(D)*abs(D)^alpha + bC*g$carnivory + bO*g$omnivory + bH*g$herbivory )
         g$consumption = rbinom( nrow(g), size=1, prob = g$p ) 
         g[ g$troph_pred == 'auto' , 'consumption' ] = 0
         g[ g$troph_pred == 'carn' & g$troph_prey == 'auto' , "consumption"] = 0
@@ -232,10 +221,6 @@ sim_dy = bind_rows( t(sims)[,2] )
 # summarise graphs 
 ig_sims = sims[3,]
 
-
-lapply(ig_sims, igraph::transitivity, type = 'average')
-
-
 sims_sum = data.frame(
     iter = 1:N_iter,
     model = 'allometric',
@@ -280,7 +265,7 @@ sim_df %>%
 N_iter = 100
 diet_sims = replicate( n=N_iter, simplify = 'array',
                   expr =  sim_FW(N=50, model = 'dietary', weights = c(0.1,0.1,0.1,0.7), seed = NULL,
-                                 base_rate = -4, bC=0.25, bO=0.5, bH=1 ) )
+                                 base_rate = -4, bC=0.25, bO=0.5, bH=0.5 ) )
 
 #diet_sims[1,][[1]][,"iter"] = 1
 
@@ -335,7 +320,7 @@ diet_df %>%
 N_iter = 100
 comb_sims = replicate( n=N_iter, simplify = 'array',
                        expr =  sim_FW(N=50, model = 'combined', weights = c(0.1,0.1,0.1,0.7), seed = NULL,
-                                      base_rate = -4, alpha=1.15,  bC=0.25, bO=0.5, bH=1 ) )
+                                      base_rate = -4, alpha=2,  bC=0.25, bO=0.5, bH=0.5 ) )
 
 #diet_sims[1,][[1]][,"iter"] = 1
 

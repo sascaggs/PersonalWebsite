@@ -29,8 +29,8 @@ library(ggraph)
 library(igraph)
 
 # link functions 
-logit = function(x) exp(x) / (1+exp(x))
-inv_logit = function(x) { exp(x) / (1 + exp(x)) }
+logit = function(p) {  log( p / (1 - p))  }
+inv_logit = function(x) { 1 / (1+ exp(-x) ) }
 
 set.seed(7)
 
@@ -45,7 +45,7 @@ plot_theme =
           panel.grid = element_blank())
 ```
 
-# Species attributes
+## Species attributes
 
 The first thing I'm going to do is generate some species attributes. These attributes includes things we might measure about species (e.g., body size) and categories we might place different species in (e.g., trophic level).
 
@@ -182,16 +182,16 @@ There is a weird trick in here (`sign(D)*abs(D)^alpha`) because R will spit out 
 
 There is one problem with the values of `p` though; they are not probabilities. So we will need to convert them to probabilities using a logit link transformation. So the actual equation looks like this:
 
-$p_{ij} = logit(D_{ij}^\alpha)$
+$p_{ij} = logistic(D_{ij}^\alpha)$
 
 ```{r}
 # link functions 
-logit = function(x) exp(x) / (1+exp(x))
-inv_logit = function(x) { exp(x) / (1 + exp(x)) }
+logit = function(p) {  log( p / (1 - p))  }
+inv_logit = function(x) { 1 / (1+ exp(-x) ) }
 
 a = 1.15
 D = g$body_size_diff
-p = logit( sign(D)*abs(D)^a )
+p = inv_logit( sign(D)*abs(D)^a )
 
 # look at first 10 values
 p[1:10]
@@ -204,7 +204,7 @@ That looks a bit better.
 
 The other model uses the index variables for feeding strategies to determine the probability of a link. This model essentially says that the probability of any given link is determined by the rate at which that feeding strategies occurs.
 
-$p_{ij} = logit( \beta_{C}C + \beta_{O}O + \beta_{H}H)$
+$p_{ij} = logistic( \beta_{C}C + \beta_{O}O + \beta_{H}H)$
 
 We set that rate using beta coefficients on each of the index variables. Since any particular link can only be 1 strategy, the other strategies zero out of the equation.
 
@@ -212,7 +212,7 @@ We set that rate using beta coefficients on each of the index variables. Since a
 bC = 0.5
 bO = 0.5
 bH = 0.5
-p = logit( bC*g$carnivory + bO*g$omnivory + bC*g$omnivory )
+p = inv_logit( bC*g$carnivory + bO*g$omnivory + bC*g$omnivory )
 ```
 
 In practice, we might set specific rates for specific pairs of species, or give each species an offset. In this case, we just have a constant probability for each type of interaction.

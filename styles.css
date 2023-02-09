@@ -3,7 +3,7 @@
 /* =Typography
 -----------------------------------------------------------------------------*/
 body {
-  font-family: 'Atkinson Hyperlegible', Georgia, 'Times New Roman', Times, Serif;
+  font-family: 'Atkinson Hyperlegible', 'Times New Roman';
   font-size: 0.85em;
   line-height: 1.5em;
   background-color: #ffffff;
@@ -16,26 +16,26 @@ pre>code {
 form,
 input[type="search"],
 select[multiple="multiple"] {
-  font-family: 'Atkinshon Hyperlegible', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Atkinshon Hyperlegible','Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-h1 
+h1,
 h2,
 h3,
 h4,
-h5 {
-  font-family: 'Atkinson Hyperlegible', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: black;
+h5  {
+  font-family: 'Atkinson Hyperlegible','Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: ;
   font-weight: bold;
 }
 
 h1 {
-  color: black;    
+  color: #ffefd5;    
   font-size: 3em;
   padding-bottom: 1em;
   line-height: 1.6em;
   font-weight: bold;
-  -webkit-text-stroke: 0.3px lavender;
+  -webkit-text-stroke: 1.3px black;
 }
 
 h2 {
@@ -94,7 +94,7 @@ blockquote p {
 }
 
 blockquote:before {
-  color: magenta;
+  color: black;
   content: open-quote;
   font-size: 4em;
   line-height: 0.1em;
@@ -137,16 +137,18 @@ output {
   font-style: normal;
   font-family: 'Courier Prime Sans', "Lucida Console", "Courier New", monospace;
 }
+ 
 
 
 nav,
 .footer {
-  font-family: 'Atkinson Hyperlegible', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Atkinson Hyperlegible','Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 100%;
 }
 
 a.nav-link,a.navbar-brand {
   border-bottom: 0;
+  color: #ffefd5;
 }
 
 a.nav-link:hover,a.navbar-brand:hover {
@@ -172,11 +174,11 @@ a.badge.badge-green {
   text-transform: none !important;
   padding: 5px 5px 3px 5px;
   text-transform: none;
-  font-family: 'Atkinson Hyperlegible', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Atkinson Hyperlegible', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .badge {
-  font-family: 'Atkinson Hyperlegible', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Atkinson Hyperlegible', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .label,
@@ -258,7 +260,7 @@ a.badge.badge-green {
 }
 
 .quarto-title-meta {
-  font-family: 'Atkinson Hyperlegible', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Atkinson Hyperlegible', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: #3300ff33;
   color: black;
   -moz-border-radius: 0px;
@@ -297,7 +299,7 @@ a.badge.badge-green {
 }
 
 .quarto-listing-category.category-cloud {
-  font-family: 'Atkinson Hyperlegible', 'Trebuchet MS', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-family: 'Atkinson Hyperlegible', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   color: black;
   font-size: 12pt;
 }
@@ -316,9 +318,9 @@ div.quarto-about-trestles .about-entity .about-link:hover {
 }
 
 .quarto-category:hover, .listing-category:hover {
-  background-color: #3300ff;
+  background-color: #0000ff;
   color: white !important;
-  opacity: .8;
+  opacity: 1;
   font-size: 12pt;
 }
 
@@ -332,11 +334,13 @@ div.listing-date, .listing-author {
 }
 
 .quarto-category, .listing-category, .listing-actions-group, .about-link-text {
-  font-family: "Atkinson Hyperlegible", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Courier Prime Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
-  font-size: 14px;
+  font-size: 14pt; 
+  opacity: 1;
 }
 
 #mlb2-4240669.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody, #mlb2-4240669.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
   padding: 0px !important;
 }
+

@@ -34,7 +34,7 @@ The size of a network is determined by the number of vertices and edges within i
 
 How do properties like density, sparseness, degree distribution, or connectivity change as the number of vertices in a network increases? To find out, I set up a few computational experiments for directed and undirected networks.
 
-## Sparse networks
+### Sparse networks
 
 A graph is considered sparse if the number of edges, $m$, is less the number of vertices, $n$; a value given by $m < O(n)$, the orthogonal group. As the number of vertices increases, the density at which a network is considered sparse decreases. Additionally, this negative relationship differs for undirected and directed networks, because the maximum edges in a directed graph is given by $n(n-1)$ whereas in an undirected graph, it is $n(n-1)/2$.
 
