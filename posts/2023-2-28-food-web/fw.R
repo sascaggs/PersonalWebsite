@@ -132,7 +132,8 @@ sim_FW = function( N ,
     
     if( model == 'allometric') { 
         
-        g$p = logit( base_rate + log( exp( g$body_size_diff )^alpha )  )
+        D = g$body_size_diff
+        g$p = logit( base_rate + sign(D)*abs(D)^alpha  )
         g$consumption = rbinom( nrow(g), size=1, prob = g$p ) 
         g[ g$troph_pred == 'auto' , 'consumption' ] = 0
         g[ g$troph_pred == 'carn' & g$troph_prey == 'auto' , "consumption"] = 0
@@ -148,7 +149,8 @@ sim_FW = function( N ,
         
     } else if( model == 'combined' ) {
         
-        g$p = logit( base_rate + log( exp( g$body_size_diff )^alpha ) + bC*g$carnivory + bO*g$omnivory + bH*g$herbivory )
+        D = g$body_size_diff
+        g$p = logit( base_rate + sign(D)*abs(D)^alpha + bC*g$carnivory + bO*g$omnivory + bH*g$herbivory )
         g$consumption = rbinom( nrow(g), size=1, prob = g$p ) 
         g[ g$troph_pred == 'auto' , 'consumption' ] = 0
         g[ g$troph_pred == 'carn' & g$troph_prey == 'auto' , "consumption"] = 0

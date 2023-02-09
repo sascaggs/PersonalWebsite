@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2023-2-28-food-web/index.html",
       "/posts/2021-12-22-network-size-and-structure/index.html",
       "/posts/2021-12-10-building-simple-multilevel-models/index.html"
     ]
