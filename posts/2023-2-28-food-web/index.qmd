@@ -7,6 +7,7 @@ categories:
   - structure
   - simulation
   - food webs
+draft: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -177,7 +178,7 @@ p = sign(D)*abs(D)^a
 p[1:10]
 ```
 
-There is a weird trick in here (`sign(D)*abs(D)^alpha`) because R will spit out some `NaN` values when we take a value to a non-integer power. See the discussion of this [here](https://stackoverflow.com/questions/32847363/weird-nan-when-raising-a-number-to-a-non-integer-power). 
+There is a weird trick in here (`sign(D)*abs(D)^alpha`) because R will spit out some `NaN` values when we take a value to a non-integer power. See the discussion of this [here](https://stackoverflow.com/questions/32847363/weird-nan-when-raising-a-number-to-a-non-integer-power).
 
 There is one problem with the values of `p` though; they are not probabilities. So we will need to convert them to probabilities using a logit link transformation. So the actual equation looks like this:
 
@@ -197,15 +198,15 @@ p[1:10]
 
 ```
 
-That looks a bit better. 
+That looks a bit better.
 
-### Dietary model 
+### Dietary model
 
-The other model uses the index variables for feeding strategies to determine the probability of a link. This model essentially says that the probability of any given link is determined by the rate at which that feeding strategies occurs. 
+The other model uses the index variables for feeding strategies to determine the probability of a link. This model essentially says that the probability of any given link is determined by the rate at which that feeding strategies occurs.
 
 $p_{ij} = logit( \beta_{C}C + \beta_{O}O + \beta_{H}H)$
 
-We set that rate using beta coefficients on each of the index variables. Since any particular link can only be 1 strategy, the other strategies zero out of the equation. 
+We set that rate using beta coefficients on each of the index variables. Since any particular link can only be 1 strategy, the other strategies zero out of the equation.
 
 ```{r}
 bC = 0.5
@@ -214,8 +215,4 @@ bH = 0.5
 p = logit( bC*g$carnivory + bO*g$omnivory + bC*g$omnivory )
 ```
 
-In practice, we might set specific rates for specific pairs of species, or give each species an offset. In this case, we just have a constant probability for each type of interaction. 
-
-
-
-
+In practice, we might set specific rates for specific pairs of species, or give each species an offset. In this case, we just have a constant probability for each type of interaction.
