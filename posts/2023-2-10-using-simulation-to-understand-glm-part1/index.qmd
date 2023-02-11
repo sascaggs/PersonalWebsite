@@ -1,6 +1,6 @@
 ---
 title: "Gaussian models Part I"
-subtitle: "Using simulation to undersand generalized linear models"
+subtitle: "Using simulation to understand generalized linear models"
 author: "Shane A. Scaggs"
 categories: 
   - modeling
