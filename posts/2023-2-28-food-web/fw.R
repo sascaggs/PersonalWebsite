@@ -18,15 +18,19 @@ df_theme =
           panel.background = element_rect(fill='black'), 
           panel.grid = element_blank())
 
+plot_theme =   
+    theme(plot.background = element_rect(fill='white'), 
+          panel.background = element_rect(fill='white', color='black'), 
+          panel.grid = element_blank())
+
 # testing ----
 N = 25
 
 # create species attributes 
 d = data.frame(
     species = 1:N, 
-    troph = sample( c('c','o','h','a'), size = N, replace = TRUE, prob = c(0.3,0.05,0.25,0.4) ), 
-    body_size = rgamma(N, shape = 2)
-)
+    troph = sample( c('carn','omni','herb','auto'), size = N, replace = TRUE, prob = c(0.3,0.05,0.25,0.4) ), 
+    body_size = rgamma(N, shape = 2))
 d
 
 # create and tidy trophic links 
@@ -48,13 +52,22 @@ g
 g$body_size_diff = (g$body_size_pred - g$body_size_prey)+0.1 
 
 # carnivores 
-g$carnivory = ifelse(g$troph_pred == 'c' & !g$troph_prey == 'p', 1, 0)
+g$carnivory = ifelse(g$troph_pred == 'carn' & !g$troph_prey == 'auto', 1, 0)
 
 # omnivores 
-g$omnivory = ifelse(g$troph_pred == 'o' , 1, 0)
+g$omnivory = ifelse(g$troph_pred == 'omni' , 1, 0)
 
 # herbivory 
-g$herbivory = ifelse(g$troph_pred == 'h' & g$troph_prey == 'p'  , 1, 0)
+g$herbivory = ifelse(g$troph_pred == 'herb' & g$troph_prey == 'auto'  , 1, 0)
+
+
+bC = 1.5
+bO = 1.5
+bH = 1.5
+bS = -1.5
+
+inv_logit( bC*g$herbivory + bO*g$omnivory + bH*g$herbivory )
+
 
 
 
@@ -179,7 +192,7 @@ el = sim1[[2]] %>%
     select(pred, prey, body_size_diff, consumption ) %>%
     filter(consumption == 1) 
 
-ig = graph.data.frame(el, directed = T, vertices = sim1[[1]])
+ig = graph.data.frame(el, directed = F, vertices = sim1[[1]])
 
 
 ig %>%
@@ -192,6 +205,15 @@ ig %>%
     scale_fill_manual(values = c('#3300ff','#ff0066','#99ff99','#ffaa00'))
 
 
+
+
+
+cl = cluster_leiden(ig, objective_function = 'modularity')
+cl$membership
+
+modularity(ig, membership = cl$membership, directed = F)
+
+
 #description 
 
 tibble(generality = graph.strength(ig, mode = 'out'), 
@@ -199,8 +221,6 @@ tibble(generality = graph.strength(ig, mode = 'out'),
        body_size = V(ig)$body_size ) %>%
     filter(!troph == 'a') %>%
     ggplot() + geom_point(aes(x=body_size, y=generality))
-
-
 
 
 ######### ALLOMETRIC MODEL ----
