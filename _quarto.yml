@@ -9,11 +9,13 @@ website:
     left:
       - about.qmd
       - CV.qmd
+      - posts.qmd
+      - gallery.qmd
       - icon: github
         href: https://github.com/
       - icon: twitter
         href: https://twitter.com
-        
+      
 format:
   html:
     css: styles.css

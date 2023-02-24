@@ -5,7 +5,6 @@ about:
   template: jolla
 ---
 
-
 ```{r setup, include=FALSE, message=F, warning=F}
 knitr::opts_chunk$set(echo = TRUE)
 library(kableExtra)
@@ -13,17 +12,16 @@ library(tidyverse)
 ```
 
 ## Shane A. Scaggs
+
 <p style="text-align: left;">
-Graduate Research Fellow<br>
-[Human Complexity Lab](https://u.osu.edu/hclab/)<br>
-Department of Anthropology<br>
-The Ohio State University<br>
-scaggs.32@osu.edu</p>
 
+Graduate Research Fellow<br> [Human Complexity Lab](https://u.osu.edu/hclab/)<br> Department of Anthropology<br> The Ohio State University<br> scaggs.32\@osu.edu
 
-### Research Interests 
+</p>
 
-Human Subsistence $\times$ Cooperation and Interspecies Coexistence $\times$ Dietary Diversity $\times$ Food Webs $\times$ Network Science $\times$ Complex Social-Ecological Systems $\times$ Community and Wildlife Ecology  
+### Research Interests
+
+Human Subsistence $\times$ Cooperation and Interspecies Coexistence $\times$ Dietary Diversity $\times$ Food Webs $\times$ Network Science $\times$ Complex Social-Ecological Systems $\times$ Community and Wildlife Ecology
 
 ### Education
 
@@ -43,10 +41,10 @@ pubs$Citation <- paste(pubs$Citation, pubs$DOI, sep = ' ')
 pubs[,1:2] %>% kbl(align = 'l') %>%
     column_spec(1, width = '0.5in')
 
-``` 
- 
+```
+
 #### Contributions
- 
+
 ```{r, echo=F, message=F, warning=F, fig.width=8, fig.height=4, fig.cap="Contribution matrix.", fig.align='center'}
 cont <- openxlsx::read.xlsx("~/Shane's Projects/folio/static/csv/pubs.xlsx", sheet=2)
 
@@ -60,10 +58,9 @@ cont %>%
         axis.text = element_text(color='black'),
         text = element_text(size=14, color='black')) + 
   labs(x=NULL, y=NULL, fill='Contributed?')  
-```  
-  
+```
 
-### Funding Support 
+### Funding Support
 
 ```{r,echo=F}
 funds <- read.csv(file = "~/Shane's Projects/folio/static/csv/funds.csv")
@@ -71,7 +68,7 @@ colnames(funds) <- c("Year","Title","Funding Agency","Amount")
 funds %>% kbl(align = 'l') %>% column_spec(1, width = '0.5in')
 ```
 
-### Conference Proceedings 
+### Conference Proceedings
 
 ```{r,echo=F}
 conf <- read.csv(file = "~/Shane's Projects/folio/static/csv/conf.csv")
@@ -82,4 +79,3 @@ conf[,1:4] %>%
     column_spec(1, width = '0.5in')
 
 ```
- 
