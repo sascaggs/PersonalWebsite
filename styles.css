@@ -30,12 +30,12 @@ h5  {
 }
 
 h1 {
-  color: #ffefd5;    
+  color: #000000;    
   font-size: 3em;
   padding-bottom: 1em;
   line-height: 1.6em;
   font-weight: bold;
-  -webkit-text-stroke: 1.3px black;
+  -webkit-text-stroke: 1.3px #ffffff;
 }
 
 h2 {
@@ -68,6 +68,7 @@ a {
 
 a:hover {
   text-decoration: underline;
+  color: #ee1;
 }
 
 hr {
