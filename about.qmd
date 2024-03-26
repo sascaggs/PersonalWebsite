@@ -15,4 +15,4 @@ about:
       href: https://github.com
 ---
 
-About this blog
+Hello. My name is Shane Scaggs. I am a Presidential Fellow studying ecological anthropology at The Ohio State University. My research combines approaches from social anthropology, landscape and community ecology, and data science to understand the how humans, wildlife, and plants interact, and the complex group, community, and landscape patterns that emerge from these interactions. This website houses my CV, links to publications, fun data visulaizations I've made, and some random blog posts I make in my spare time.
