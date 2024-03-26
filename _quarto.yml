@@ -5,7 +5,7 @@ project:
 website: 
   title: "Shane A. Scaggs"
   navbar:
-    background: "#3300ffcc"
+    background: "#3300ff"
     left:
       - about.qmd
       - CV.qmd
